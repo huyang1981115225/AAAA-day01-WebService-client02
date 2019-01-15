@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://ws.tedu.cn/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.tedu.cn/"
+	name="HelloWSImplService">
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://ws.tedu.cn/"
+				schemaLocation="http://localhost:8989/AAAA-day01-WebService/hellows?xsd=1" />
+		</xsd:schema>
+	</types>
+	<message name="sayHello">
+		<part name="parameters" element="tns:sayHello" />
+	</message>
+	<message name="sayHelloResponse">
+		<part name="parameters" element="tns:sayHelloResponse" />
+	</message>
+	<message name="introduce">
+		<part name="parameters" element="tns:introduce" />
+	</message>
+	<message name="introduceResponse">
+		<part name="parameters" element="tns:introduceResponse" />
+	</message>
+	<portType name="HelloWSImpl">
+		<operation name="sayHello">
+			<input wsam:Action="http://ws.tedu.cn/HelloWSImpl/sayHelloRequest"
+				message="tns:sayHello" />
+			<output wsam:Action="http://ws.tedu.cn/HelloWSImpl/sayHelloResponse"
+				message="tns:sayHelloResponse" />
+		</operation>
+		<operation name="introduce">
+			<input wsam:Action="http://ws.tedu.cn/HelloWSImpl/introduceRequest"
+				message="tns:introduce" />
+			<output wsam:Action="http://ws.tedu.cn/HelloWSImpl/introduceResponse"
+				message="tns:introduceResponse" />
+		</operation>
+	</portType>
+	<binding name="HelloWSImplPortBinding" type="tns:HelloWSImpl">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<operation name="sayHello">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="introduce">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="HelloWSImplService">
+		<port name="HelloWSImplPort" binding="tns:HelloWSImplPortBinding">
+			<soap:address location="http://localhost:8088/AAAA-day01-WebService/hellows" />
+		</port>
+	</service>
+</definitions>
